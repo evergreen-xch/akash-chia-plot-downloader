@@ -3,6 +3,7 @@ from parsel import Selector
 import aria2p
 import time
 from urllib.parse import urlparse
+import sys
 
 max_concurrent_downloads = 2
 max_connections_per_file = 5
@@ -11,10 +12,6 @@ max_same_server = 1
 download_paths = [
     'D:\\chia\\portable-plots',
     'E:\\chia\\portable-plots',
-]
-
-plot_manager_urls = [
-    'http://example.ingress.sfo.computer',
 ]
 
 # if set to false, won't actually add any new files to download to aria. Used in rare situations.
@@ -30,7 +27,7 @@ aria2 = aria2p.API(
 )
 
 
-def main():
+def main(plot_manager_urls):
     #print(aria2.get_global_options())
 
     aria2.set_global_options(options={
@@ -180,4 +177,4 @@ def get_next_download_path():
     return download_path
 
 
-main()
+main(sys.argv[1])
